@@ -116,9 +116,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 import os
 
-CONVEX_URL = os.environ.get("CONVEX_DEPLOYMENT_URL")
-CONVEX_KEY = os.environ.get("CONVEX_ADMIN_KEY")
-
+# CONVEX_URL = os.environ.get("CONVEX_DEPLOYMENT_URL")
+# CONVEX_KEY = os.environ.get("CONVEX_ADMIN_KEY")
+CONVEX_URL="https://groovy-wildebeest-80.convex.cloud"
+CONVEX_KEY="anonymous:anonymous-frontend"
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
