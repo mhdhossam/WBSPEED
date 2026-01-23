@@ -134,12 +134,6 @@ class LoginView(APIView):
 #             return Response({"error": str(exc)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
   # make sure this imports your class above
 
-import json
-import base64
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-from webperfomance.convex_client import ConvexClient
 
 
 class WasmGateway(APIView):
