@@ -1,24 +1,20 @@
-import {
-  wasmReady,
-  buildSealedRequest,
-  decodeSealedResponse
-} from "./wasmClient";
+// wasmApi.js
+import { buildPacket, decodePacket } from "./wasmClient";
 
-const BACKEND = "http://127.0.0.1:8000";
+const API_URL = "http://localhost:8000/wasm_gateway/";
 
-export async function sendConvex(route, payload) {
-  await wasmReady();
+export async function sendConvex(route, payload = {}, token = null) {
+  const packet = await buildPacket(route, payload, token);
 
-  const sealed = buildSealedRequest(route, payload, null);
-
-  const res = await fetch(`${BACKEND}/wasm_gateway/`, {
+  const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: sealed,
+    body: packet
   });
 
-  const json = await res.json();
-  if (!json.payload) throw new Error("No payload");
+  const raw = await res.text();
 
-  return decodeSealedResponse(JSON.stringify(json));
+  if (!res.ok) throw new Error("Gateway error: " + raw);
+
+  return decodePacket(raw);
 }
